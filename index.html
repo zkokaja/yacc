@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!--
+    https://chordpic.com is used to generate all guitar chords
+    https://www.all-guitar-chords.com is to lookup/verify chords
+
+    TODO:
+        - filters to include 7th, 9th, 11th, 13th
+        - add voicings
+        - tooltip
+        - search function (highlight chord?)
+
+Sharp sign: ♯ Flat sign: ♭
+
+Color map from https://github.com/sonph/onehalf/
+                        light     dark
+0   normal  black       #383a42   #282c34
+1   normal  red         #e45649   #e06c75
+2   normal  green       #50a14f   #98c379
+3   normal  yellow      #c18401   #e5c07b
+4   normal  blue        #0184bc   #61afef
+5   normal  magenta     #a626a4   #c678dd
+6   normal  cyan        #0997b3   #56b6c2
+7   normal  white       #fafafa   #dcdfe4
+            foreground  #383a42   #dcdfe4
+            background  #fafafa   #282c34
+-->
+<html>
+    <title>YACC</title>
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <style type="text/css">
+    body {
+        background-color: #fafafa;
+    }
+    .gallery {
+        margin-left: 170px;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-gap: 10px;
+        align-items: start;
+        justify-items: start;
+    }
+    .gallery img {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar {
+        height: 100%;
+        width: 150px;
+        position: fixed!important;
+        top: 0;
+        left: 0;
+        padding: 0 20px;
+        z-index: 1;
+        overflow: auto;
+        background-color: #dcdfe4;
+    }
+
+    h1, h2, h3 {
+        color: #282c34;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .radio-label {
+        background: #fafafa;
+        border-radius: 5px;
+        display: inline;
+        padding: 10px;
+        position: relative;
+        width: 100%;
+    }
+    .radio-label:hover {
+        background: #61afef;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .radio-btn {
+        position: absolute;
+        visibility: hidden;
+    }
+
+    .radio-btn:checked + .radio-label {
+        background: #0184bc;
+        color: #fafafa;
+    }
+
+    @media print {
+        @page { margin: 2cm }
+        .sidebar {
+            display: none;
+        }
+        .gallery {
+            width: 100%;
+            margin: 0;
+            float: none;
+            margin-left: 0;
+        }
+        img {
+            page-break-inside: avoid;
+        }
+    }
+    </style>
+    <script type="text/javascript">
+      window.onload = function() {
+        // Root settings (4,5,6)
+        const roots = document.querySelectorAll('.sidebar #rootsettings input');
+        for(var i = 0; i < roots.length; i++) {
+            roots[i].addEventListener('click', function(e) {
+                const galleries = document.querySelectorAll('.gallery');
+                for(var i = 0; i < galleries.length; i++) {
+                    galleries[i].classList.add('hidden');
+                    if (galleries[i].id[7] == e.target.id) {
+                        galleries[i].classList.remove('hidden');
+                    }
+                }
+            });
+        }
+
+        // Chord settings (6,7,8,9)
+        const boxes = document.querySelectorAll('.sidebar #chordsettings input');
+        for(var i = 0; i < boxes.length; i++) {
+          boxes[i].addEventListener('click', function(e) {
+              const chords = document.getElementsByClassName(e.target.name);
+              for(var i = 0; i < chords.length; i++) {
+                if (e.target.checked) {
+                  chords[i].classList.remove('hidden');
+                } else {
+                  chords[i].classList.add('hidden');
+                }
+              }
+          });
+        }
+      };
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>YACC</h1>
+        <p>Yet another chord chart</p>
+        <hr />
+
+        <section id='rootsettings'>
+            <h2>Root on string</h2>
+            <input class="radio-btn" name="stringroot" id="4" type="radio">
+            <label class="radio-label" for="4">4<sup>th</sup></label>
+            <input class="radio-btn" name="stringroot" id="5" type="radio" checked>
+            <label class="radio-label" for="5">5<sup>th</sup></label>
+            <input class="radio-btn" name="stringroot" id="6" type="radio">
+            <label class="radio-label" for="6">6<sup>th</sup></label>
+        </section>
+
+        <section id='chordsettings'>
+        <h2>Filter chords</h2>
+        <div>
+              <input type="checkbox" id="sixes" name="six" checked>
+              <label for="sixes">6s</label>
+        </div>
+        <div>
+              <input type="checkbox" id="nines" name="nine" checked>
+              <label for="nines">9s</label>
+        </div>
+        <div>
+              <input type="checkbox" id="thirteens" name="thirteen" checked>
+              <label for="thirteens">13s</label>
+        </div>
+        </section>
+    </div>
+
+    <div id="gallery4" class="gallery hidden" align="center">
+        <img src="4/C.svg" />
+        <img src="4/C6.svg" class="six" />
+        <img src="4/C-ma7.svg" />
+        <img src="4/C-ma9.svg" class="nine" />
+        <img src="4/C7.svg" />
+        <img src="4/C9.svg" class="nine" />
+        <img src="4/C-mi.svg" />
+        <img src="4/C-mi6.svg" class="six" />
+        <img src="4/C-mi6add9.svg" class="six nine" />
+        <img src="4/C-mi7.svg" />
+        <img src="4/C-mi11.svg" />
+        <img src="4/C-mima7.svg" />
+        <img src="4/C-mi7b5.svg" />
+        <img src="4/C-dim7.svg" />
+        <img src="4/C-sus4.svg" />
+        <img src="4/C7sus4.svg" />
+        <img src="4/C-ma7b5.svg" />
+        <img src="4/C-ma7s5.svg" />
+        <img src="4/C7b5.svg" />
+    </div>
+
+    <div id="gallery5" class="gallery" align="center">
+        <img src="5/C.svg" />
+        <img src="5/C6.svg" class="six" />
+        <img src="5/C69.svg" class="six nine" />
+        <img src="5/C-add9.svg" class="nine" />
+        <img src="5/C-ma7.svg" />
+        <img src="5/C-ma9.svg" class="nine" />
+        <img src="5/C-ma11.svg" />
+        <img src="5/C-ma13.svg" class="thirteen adv" />
+        <img src="5/C7.svg" />
+        <img src="5/C9.svg" class="nine" />
+        <img src="5/C11.svg" />
+        <img src="5/C11-2.svg" />
+        <img src="5/C13.svg" class="thirteen adv" />
+        <img src="5/C-mi.svg" />
+        <img src="5/C-mi6.svg" class="six" />
+        <img src="5/C-mi69.svg" class="six nine" />
+        <img src="5/C-mi9.svg" class="nine" />
+        <img src="5/C-mi7.svg" />
+        <img src="5/C-mi9-2.svg" class="nine" />
+        <img src="5/C-mi11.svg" />
+        <img src="5/C-mi13.svg" class="thirteen" />
+        <img src="5/C-mima7.svg" />
+        <img src="5/C-mi9ma7.svg" />
+        <img src="5/C-mi7b5.svg" />
+        <img src="5/C-dim.svg" />
+        <img src="5/C-dim7.svg" />
+        <img src="5/C-aug.svg" />
+        <img src="5/C-sus4.svg" />
+        <img src="5/C7sus4.svg" />
+        <img src="5/C-ma7b5.svg" />
+        <img src="5/C-ma7s5.svg" />
+        <img src="5/C-ma9s11.svg" />
+        <img src="5/C-ma13s11.svg" />
+        <img src="5/C7b5.svg" />
+        <img src="5/C9b5.svg" />
+        <img src="5/C7s5.svg" />
+        <img src="5/C9s5.svg" />
+        <img src="5/C7b5b9.svg" />
+        <img src="5/C7s5s9.svg" />
+        <img src="5/C7s5b9.svg" />
+        <img src="5/C13b9.svg" />
+        <!-- <img src="5/C13b11.svg" /> -->
+    </div>
+
+    <div id="gallery6" class="gallery hidden" align="center">
+        <img src="6/C.svg" />
+        <img src="6/C6.svg" class="six" />
+        <!-- <img src="6/C69.svg" class="six nine" /> -->
+        <img src="6/C-add9.svg" class="nine" />
+        <img src="6/C-ma7.svg" />
+        <img src="6/C-ma9.svg" class="nine" />
+        <img src="6/C-ma13.svg" class="thirteen adv" />
+        <img src="6/C7.svg" />
+        <img src="6/C9.svg" class="nine" />
+        <img src="6/C11.svg" />
+        <img src="6/C13.svg" class="thirteen adv" />
+        <img src="6/C-mi.svg" />
+        <img src="6/C-mi6.svg" class="six" />
+        <img src="6/C-mi69.svg" class="six nine" />
+        <img src="6/C-mi7.svg" />
+        <img src="6/C-mi9.svg" class="nine" />
+        <img src="6/C-mi11.svg" />
+        <img src="6/C-mi13.svg" class="thirteen" />
+        <img src="6/C-mima7.svg" />
+        <img src="6/C-mi9ma7.svg" />
+        <img src="6/C-mi7b5.svg" />
+        <img src="6/C-dim.svg" />
+        <img src="6/C-dim7.svg" />
+        <img src="6/C-aug.svg" />
+        <img src="6/C-sus4.svg" />
+        <img src="6/C7sus4.svg" />
+        <img src="6/C-ma7b5.svg" />
+        <img src="6/C-ma7s5.svg" />
+        <img src="6/C-ma9s11.svg" />
+        <img src="6/C-ma13s11.svg" />
+        <img src="6/C7b5.svg" />
+        <img src="6/C9b5.svg" />
+        <img src="6/C7s5.svg" />
+        <img src="6/C9s5.svg" />
+        <img src="6/C7b5b9.svg" />
+        <img src="6/C7s5b9.svg" />
+        <!-- <img src="6/C13b9.svg" /> -->
+    </div>
+
+</body>
+</html>
